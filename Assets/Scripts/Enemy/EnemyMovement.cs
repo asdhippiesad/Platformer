@@ -6,25 +6,22 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
-    [SerializeField] private int _currentPosition;
 
     private Coroutine _coroutine;
     private Vector2 _move;
     private SpriteRenderer _rotation;
 
-    private float _waitForSecond = 2f;
+    private int _currentPosition;
     private bool _shouldRight = true;
 
     private void Awake()
     {
-        _coroutine = StartCoroutine(Move(_waitForSecond));
+        _coroutine = StartCoroutine(Move());
         _rotation = GetComponent<SpriteRenderer>();
     }
 
-    private IEnumerator Move(float delay)
+    private IEnumerator Move()
     {
-        var wait = new WaitForSeconds(delay);
-
         while (enabled)
         {
             transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
@@ -37,8 +34,6 @@ public class EnemyMovement : MonoBehaviour
                     _currentPosition = 1;
 
                 Flip();
-
-                yield return wait;
             }
 
             yield return null;
@@ -47,10 +42,9 @@ public class EnemyMovement : MonoBehaviour
 
     private void Flip()
     {
-        if ((_move.x > 0 && _shouldRight == false) || (_move.x < 0 && _shouldRight == true))
-        {
-            transform.localScale *= new Vector2(-1, 1);
-            _shouldRight = _shouldRight = false;
-        }
+        _shouldRight = !_shouldRight;
+        Transform sprite = transform;
+
+        sprite.localScale = new Vector3(-sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
     }
 }
