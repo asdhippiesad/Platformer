@@ -6,12 +6,13 @@ public class CoinSpawner : MonoBehaviour
     [SerializeField] private Coin _coinPrefab;
     [SerializeField] private Transform _coinSpawn;
 
+    private Coroutine _coroutine;
     private float _minSpawnInterval = 5f;
     private float _maxSpawnInterval = 10f;
 
     private void Awake()
     {
-        StartCoroutine(SpawnCoins());
+        _coroutine = StartCoroutine(SpawnCoins());
     }
 
     private IEnumerator SpawnCoins()

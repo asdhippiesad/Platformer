@@ -1,38 +1,56 @@
 using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
+    [SerializeField] private int _currentPosition;
 
-    private Rigidbody2D _rigidbody;
-    private Animator _animator;
-    private SpriteRenderer _sprite;
-    private Vector2 _position;
-    private int _currentPosition;
+    private Coroutine _coroutine;
+    private Vector2 _move;
+    private SpriteRenderer _rotation;
 
-    private void Start()
+    private float _waitForSecond = 2f;
+    private bool _shouldRight = true;
+
+    private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _sprite = GetComponent<SpriteRenderer>();
+        _coroutine = StartCoroutine(Move(_waitForSecond));
+        _rotation = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    private IEnumerator Move(float delay)
     {
-        Move();
-        Flip();
-    }
+        var wait = new WaitForSeconds(delay);
 
-    private void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
+        while (enabled)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, _point[_currentPosition].position) < 0.2f)
+            {
+                if (_currentPosition > 0)
+                    _currentPosition = 0;
+                else
+                    _currentPosition = 1;
+
+                Flip();
+
+                yield return wait;
+            }
+
+            yield return null;
+        }
     }
 
     private void Flip()
     {
-        _sprite.flipX = _position.x < 0;
+        if ((_move.x > 0 && _shouldRight == false) || (_move.x < 0 && _shouldRight == true))
+        {
+            transform.localScale *= new Vector2(-1, 1);
+            _shouldRight = _shouldRight = false;
+        }
     }
 }

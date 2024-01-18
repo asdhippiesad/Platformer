@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
     private Animator _animator;
     private Rigidbody2D _rigidbody;
@@ -15,16 +15,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        PlayerMove();
-        PlayerJump();
+        Move();
     }
 
-    private void PlayerJump()
-    {
-        _animator.SetBool(AnimatorData.Parameters.Jump, true);
-    }
-
-    private void PlayerMove()
+    private void Move()
     {
         float runSpeed = Mathf.Abs(_rigidbody.velocity.x);
         _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(runSpeed));
