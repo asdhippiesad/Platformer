@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
 
     private int _currentPosition;
     private bool _shouldRight = true;
+    private float _thresholdDistance = 0.2f;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
 
-            if (Vector2.Distance(transform.position, _point[_currentPosition].position) < 0.2f)
+            if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
             {
                 if (_currentPosition > 0)
                     _currentPosition = 0;

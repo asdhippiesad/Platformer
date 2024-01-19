@@ -679,7 +679,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 200
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -962,7 +962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751745648}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99999857, z: -0, w: -0.0017331308}
+  m_LocalRotation: {x: -0, y: -0.9999985, z: 0, w: -0.0017365881}
   m_LocalPosition: {x: 5.4, y: -2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1081,7 +1081,7 @@ PolygonCollider2D:
       - {x: 0.35522476, y: -0.28324696}
       - {x: 0.2675494, y: -0.039254952}
       - {x: 0.32500002, y: 0.32500002}
-  m_UseDelaunayMesh: 0
+  m_UseDelaunayMesh: 1
 --- !u!114 &751745654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,11 +1094,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76e662ef8a50374393e821ed1d28b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 2
   _point:
   - {fileID: 1838778687}
   - {fileID: 238203648}
-  _currentPosition: 0
 --- !u!114 &751745655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,7 +1107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 751745648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d29fe90a74e39e647945d0204153f4e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 01ad349dbc5e5be40a0702c4ab1dcebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &963284159
@@ -1580,7 +1579,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1618,7 +1617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add6f056786cb7041842817e799cf1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 12
+  _jumpForce: 11
   _checkRadius: 1
   _ground:
     serializedVersion: 2

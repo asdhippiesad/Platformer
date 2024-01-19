@@ -17,6 +17,6 @@ public class EnemyAnimation : MonoBehaviour
 
     private void SetRunAnimation()
     {
-        _animator.SetFloat("Run", 1);
+        _animator.SetBool(AnimatorData.Parameters.Run, false);
     }
 }
