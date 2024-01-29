@@ -4,19 +4,15 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour
 {
     private Animator _animator;
+    private float _speed = 1f;
 
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    private void Awake() => _animator = GetComponent<Animator>();
 
-    private void Update()
-    {
-        SetRunAnimation();
-    }
+    private void Update() => SetRunAnimation();
 
     private void SetRunAnimation()
     {
-        _animator.SetBool(AnimatorData.Parameters.Run, false);
+        float runSpeed = Mathf.Abs(_speed);
+        _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(runSpeed));
     }
 }

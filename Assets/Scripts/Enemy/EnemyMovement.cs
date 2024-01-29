@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
@@ -7,37 +8,44 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
 
-    private Coroutine _coroutine;
+    public event Action OnStartChasing;
+    public event Action OnStopChasing;
+
     private Vector2 _move;
     private SpriteRenderer _rotation;
 
     private int _currentPosition;
+    private float _thresholdDistance = 2f;
     private bool _shouldRight = true;
-    private float _thresholdDistance = 0.2f;
+    private bool _isChasing = false;
 
-    private void Awake()
+    private void Awake() => _rotation = GetComponent<SpriteRenderer>();
+
+    private void Update() => Move();
+
+    public void StartChasing()
     {
-        _coroutine = StartCoroutine(Move());
-        _rotation = GetComponent<SpriteRenderer>();
+        _isChasing = true;
+        OnStartChasing?.Invoke();
     }
 
-    private IEnumerator Move()
+    public void StopChasing()
     {
-        while (enabled)
+        _isChasing = false;
+        OnStopChasing?.Invoke();
+    }
+
+    public void Move()
+    {
+
+        transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _point[_currentPosition].position, _speed * Time.deltaTime);
+            _currentPosition = (_currentPosition + 1) % _point.Length;
 
-            if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
-            {
-                if (_currentPosition > 0)
-                    _currentPosition = 0;
-                else
-                    _currentPosition = 1;
+            Flip();
 
-                Flip();
-            }
-
-            yield return null;
         }
     }
 

@@ -13,10 +13,7 @@ public class PlayerAnimation : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        Move();
-    }
+    private void Update() => Move();
 
     private void Move()
     {
