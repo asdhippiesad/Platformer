@@ -1,20 +1,17 @@
 using UnityEngine;
+using System.Collections;
 
 public class Chaser : MonoBehaviour
 {
     private EnemyMovement _enemy;
 
-    private void Awake() =>_enemy = GetComponent<EnemyMovement>();
+    private void Awake() => _enemy = GetComponent<EnemyMovement>();
 
-    private void OnEnable() => _enemy.OnStartChasing += OnStartChasing;
-
-    private void OnDisable() => _enemy.OnStopChasing -= OnStopChasing;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.TryGetComponent<PlayerMover>(out PlayerMover player))
         {
-            _enemy.StartChasing();
+            _enemy.StartChasing(player);
         }
     }
 
@@ -24,15 +21,5 @@ public class Chaser : MonoBehaviour
         {
             _enemy.StopChasing();
         }
-    }
-
-    private void OnStartChasing()
-    {
-
-    }
-
-    private void OnStopChasing()
-    {
-
     }
 }

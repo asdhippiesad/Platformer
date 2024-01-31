@@ -11,7 +11,7 @@ public class ItemsSpawner : MonoBehaviour
 
     private int _minSpawnInterval = 1;
     private int _maxSpawnInterval = 5;
-    private float _randomSpawnObject = 7f;
+    private float _randomSpawnObject = 6f;
 
     private void Awake()
     {
@@ -36,13 +36,12 @@ public class ItemsSpawner : MonoBehaviour
 
             for (int i = 0; i < _point.Length; i++)
             {
-                Vector3 spawnPosition = new Vector3(_point[i].position.y, Random.Range(0f, _randomSpawnObject), _point[i].position.z);
+                Vector3 spawnPosition = new Vector3(_point[i].position.y, Random.Range(1f, _randomSpawnObject), _point[i].position.z);
                 Instantiate(_object[randomIndex], spawnPosition, Quaternion.identity);
             }
 
             maxCount--;
 
         } while (maxCount > 0);
-
     }
 }
