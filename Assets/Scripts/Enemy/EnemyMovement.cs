@@ -7,24 +7,22 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
 
-    public event Action OnStartChasing;
-    public event Action OnStopChasing;
-
     public bool IsChasing = true;
 
     private Vector2 _move;
-    private SpriteRenderer _rotation;
+    private SpriteRenderer[] _rotation;
     private PlayerMover _player;
     private Vector3 _directionOfPlayer;
 
     private int _currentPosition;
     private float _thresholdDistance = 1f;
     private bool _shouldRight = true;
-    private bool _patrolling = true;
+    private bool _patrolling = false;
 
     private void Awake()
     {
-        _rotation = GetComponent<SpriteRenderer>();
+        _rotation = GetComponentsInChildren<SpriteRenderer>();
+        _player = GetComponent<PlayerMover>();
     }
 
     private void Update() => Move();
@@ -34,25 +32,23 @@ public class EnemyMovement : MonoBehaviour
         _player = player;
         IsChasing = true;
         _patrolling = false;
-        OnStartChasing?.Invoke();
     }
 
     public void StopChasing()
     {
         IsChasing = false;
         _patrolling = true;
-        OnStopChasing?.Invoke();
     }
 
     public void Move()
     {
-        if (_shouldRight)
-        {
-            MovePatrol();
-        }
-        else if (_player != null && IsChasing)
+        if (_player != null && IsChasing)
         {
             MoveChase();
+        }
+        else
+        {
+            MovePatrol();
         }
     }
 
@@ -63,36 +59,40 @@ public class EnemyMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
         {
             _currentPosition = (_currentPosition + 1) % _point.Length;
-            Flip();
+            ChangingDirection();
         }
     }
 
     private void MoveChase()
     {
-        if (_player != null)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
-            ChangingDirection();
-        }
+        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
+        ChangingDirection();
     }
 
     private void ChangingDirection()
     {
-        if (_player.transform.position.x < transform.position.x && _shouldRight == false)
+        foreach (SpriteRenderer spriteRenderer in _rotation)
         {
-            Flip();
-        }
-        else if(_player.transform.position.x > transform.position.x && _shouldRight == true)
-        {
-            Flip();
+            if (_player != null)
+            {
+                if (transform.position.x < _player.transform.position.x && spriteRenderer.flipX == false)
+                {
+                    Flip(spriteRenderer);
+                }
+                else if (transform.position.x > _player.transform.position.x && spriteRenderer.flipX == true)
+                {
+                    Flip(spriteRenderer);
+                }
+            }
+            else if (_player == null)
+            {
+                Flip(spriteRenderer);
+            }
         }
     }
 
-    private void Flip()
+    private void Flip(SpriteRenderer spriteRenderer)
     {
-        _shouldRight = !_shouldRight;
-        Transform sprite = transform;
-
-        sprite.localScale = new Vector3(-sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 }

@@ -13,11 +13,24 @@ public class PlayerAnimation : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update() => Move();
+    private void Update()
+    {
+        Move();
+
+        if (Input.GetKeyDown(KeyCode.E))
+            Attack();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Jump();
+    }
 
     private void Move()
     {
         float runSpeed = Mathf.Abs(_rigidbody.velocity.x);
         _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(runSpeed));
     }
+
+    private void Attack() => _animator.SetTrigger(AnimatorData.Parameters.Attack);
+
+    private void Jump() => _animator.SetTrigger(AnimatorData.Parameters.Jump);
 }
