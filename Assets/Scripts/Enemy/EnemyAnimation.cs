@@ -8,11 +8,13 @@ public class EnemyAnimation : MonoBehaviour
 
     private void Awake() => _animator = GetComponent<Animator>();
 
-    private void Update() => SetRunAnimation();
-
-    private void SetRunAnimation()
+    private void Update()
     {
-        float runSpeed = Mathf.Abs(_speed);
-        _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(runSpeed));
+        Run();
+        Attack();
     }
+
+    private void Attack() => _animator.SetTrigger(AnimatorData.Parameters.Attack);
+
+    private void Run() => _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(_speed));
 }

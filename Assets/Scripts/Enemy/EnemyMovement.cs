@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
@@ -42,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        if (_player != null && IsChasing)
+        if (_player != null)
         {
             MoveChase();
         }
