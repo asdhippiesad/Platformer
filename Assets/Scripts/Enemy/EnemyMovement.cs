@@ -6,21 +6,21 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
 
-    public bool IsChasing = true;
 
     private Vector2 _move;
     private SpriteRenderer[] _rotation;
+    private SpriteRenderer _spriteRenderer;
     private PlayerMover _player;
-    private Vector3 _directionOfPlayer;
 
     private int _currentPosition;
     private float _thresholdDistance = 1f;
-    private bool _shouldRight = true;
-    private bool _patrolling = false;
+    private bool _isPatrolling = false;
+    private bool _isChasing = true;
 
     private void Awake()
     {
         _rotation = GetComponentsInChildren<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = GetComponent<PlayerMover>();
     }
 
@@ -29,14 +29,16 @@ public class EnemyMovement : MonoBehaviour
     public void StartChasing(PlayerMover player)
     {
         _player = player;
-        IsChasing = true;
-        _patrolling = false;
+        _isChasing = true;
+        _isPatrolling = false;
     }
 
     public void StopChasing()
     {
-        IsChasing = false;
-        _patrolling = true;
+        _player = null;
+        _isChasing = false;
+        _isPatrolling = true;
+        Flip(_spriteRenderer);
     }
 
     public void Move()
@@ -58,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
         {
             _currentPosition = (_currentPosition + 1) % _point.Length;
-            ChangingDirection();
+            Flip(_spriteRenderer);
         }
     }
 
@@ -83,9 +85,9 @@ public class EnemyMovement : MonoBehaviour
                     Flip(spriteRenderer);
                 }
             }
-            else if (_player == null)
+            else
             {
-                Flip(spriteRenderer);
+               Flip(spriteRenderer);
             }
         }
     }

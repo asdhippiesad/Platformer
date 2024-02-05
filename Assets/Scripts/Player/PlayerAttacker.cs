@@ -21,7 +21,6 @@ public class PlayerAttacker : MonoBehaviour
         if (hitEnemy != null)
         {
             OnAttack?.Invoke(damage);
-            Debug.Log("Attack");
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyMovement))]
 public class Chaser : MonoBehaviour
 {
     private EnemyMovement _enemy;
