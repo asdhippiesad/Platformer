@@ -22,14 +22,20 @@ public class EnemyAttacker : MonoBehaviour
     public void ReactToAttack()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, _attackRange, _playerLayer);
-        PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
 
-        if (playerHealth != null)
+        if (hit.collider != null)
         {
-            Debug.DrawRay(transform.position, transform.right, Color.red);
-            playerHealth.TakeDamage(_damage);
-            _enemyAnimation.Attack();
-            Debug.Log(_damage);
+            if (hit.collider.gameObject.layer == LayerMask.GetMask("Player"))
+            {
+                PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
+
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(_damage);
+                    _enemyAnimation.Attack();
+                    Debug.Log(_damage);
+                }
+            }
         }
     }
 }
