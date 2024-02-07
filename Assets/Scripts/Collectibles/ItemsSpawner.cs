@@ -11,19 +11,19 @@ public class ItemsSpawner : MonoBehaviour
 
     private int _minSpawnInterval = 1;
     private int _maxSpawnInterval = 5;
-    private float _randomSpawnObject = 6f;
+    private float _randomSpawnPoint = 6f;
 
-    private void Awake()
+    private void Start()
     {
         _point = new Transform[_pointSpawn.childCount];
 
         for (int i = 0; i < _pointSpawn.childCount; i++)
             _point[i] = _pointSpawn.GetChild(i);
 
-        _coroutine = StartCoroutine(SpawnCoins());
+        _coroutine = StartCoroutine(SpawnItems());
     }
 
-    private IEnumerator SpawnCoins()
+    private IEnumerator SpawnItems()
     {
         int maxCount = 5;
 
@@ -31,12 +31,11 @@ public class ItemsSpawner : MonoBehaviour
         {
             float spawninterval = Random.Range(_minSpawnInterval, _maxSpawnInterval);
             int randomIndex = Random.Range(0, _object.Length);
-            var waitForSeconds = new WaitForSeconds(spawninterval);
-            yield return waitForSeconds;
+            yield return new WaitForSeconds(spawninterval);
 
             for (int i = 0; i < _point.Length; i++)
             {
-                Vector3 spawnPosition = new Vector3(_point[i].position.y, Random.Range(1f, _randomSpawnObject), _point[i].position.z);
+                Vector3 spawnPosition = new Vector3(_point[i].position.x, Random.Range(0, _randomSpawnPoint), _point[i].position.z);
                 Instantiate(_object[randomIndex], spawnPosition, Quaternion.identity);
             }
 

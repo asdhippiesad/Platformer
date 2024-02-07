@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
             Attack();
 
         if (Input.GetKeyDown(KeyCode.Space))

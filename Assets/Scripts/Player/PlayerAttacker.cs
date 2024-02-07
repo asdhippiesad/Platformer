@@ -1,26 +1,33 @@
 using UnityEngine;
-using System;
 
-[RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _attackDistance = 0.45f;
     [SerializeField] private Transform _attackPoint;
 
-    public event Action<int> OnAttack;
+    private PlayerHealth _playerHealth;
+    private float _damage = 50f;
 
-    private int _damage = 50;
+    private void Awake() => _playerHealth = GetComponent<PlayerHealth>();
 
-    private void Update() => Attack(_damage);
+    private void OnEnable() => _playerHealth.Attacked += ReactToAttack;
 
-    public void Attack(int damage)
+    private void OnDisable() => _playerHealth.Attacked -= ReactToAttack;
+
+    public void ReactToAttack()
     {
-        Collider2D hitEnemy = Physics2D.OverlapCircle(_attackPoint.position, _attackDistance, _enemyLayer);
+        RaycastHit2D hit = Physics2D.Raycast(_attackPoint.position, transform.right, _attackDistance, _enemyLayer);
 
-        if (hitEnemy != null)
+        if (hit.collider != null)
         {
-            OnAttack?.Invoke(damage);
+            EnemyHealth enemyHealth = hit.collider.GetComponent<EnemyHealth>();
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(_damage);
+                Debug.Log(_damage);
+            }
         }
     }
 }
