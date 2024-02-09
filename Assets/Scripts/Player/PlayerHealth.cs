@@ -31,15 +31,5 @@ public class PlayerHealth : MonoBehaviour
         _currentHealth = Math.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
         _enemy.ReactToAttack();
         Attacked?.Invoke();
-        Die();
-    }
-
-    private void Die()
-    {
-        if (_currentHealth <= _minHealth)
-        {
-            Destroy(gameObject);
-
-        }
     }
 }

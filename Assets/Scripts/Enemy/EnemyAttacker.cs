@@ -3,39 +3,35 @@ using UnityEngine;
 public class EnemyAttacker : MonoBehaviour
 {
     [SerializeField] private int _damage = 40;
-    [SerializeField] private int _attackRange = 10;
-    [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private int _attackRange = 1;
 
     private EnemyAnimation _enemyAnimation;
-    private EnemyHealth _enemyHealth;
+    private PlayerHealth _playerHealth;
 
     private void Awake()
     {
+        _playerHealth = GetComponent<PlayerHealth>();
         _enemyAnimation = GetComponent<EnemyAnimation>();
-        _enemyHealth = GetComponent<EnemyHealth>();
     }
 
-    private void OnEnable() => _enemyHealth.Attacked += ReactToAttack;
+    private void OnEnable()
+    {
+        if (_playerHealth != null)
+            _playerHealth.Attacked += ReactToAttack;
+    }
 
-    private void OnDisable() => _enemyHealth.Attacked -= ReactToAttack;
+    private void OnDisable()
+    {
+        if (_playerHealth != null)
+            _playerHealth.Attacked -= ReactToAttack;
+    }
 
     public void ReactToAttack()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, _attackRange, _playerLayer);
-
-        if (hit.collider != null)
+        if (Vector3.Distance(transform.position, _playerHealth.transform.position) <= _attackRange)
         {
-            if (hit.collider.gameObject.layer == LayerMask.GetMask("Player"))
-            {
-                PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
-
-                if (playerHealth != null)
-                {
-                    playerHealth.TakeDamage(_damage);
-                    _enemyAnimation.Attack();
-                    Debug.Log(_damage);
-                }
-            }
+            _enemyAnimation.Attack();
+            _playerHealth.TakeDamage(_damage);
         }
     }
 }

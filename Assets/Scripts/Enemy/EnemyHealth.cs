@@ -1,23 +1,42 @@
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(EnemyAnimation))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 100;
 
     public event Action Attacked;
 
+    private EnemyAnimation _enemyAnimation;
     private PlayerAttacker _player;
     private float _currentHealth;
     private float _minHealth = 0;
 
-    private void Awake() => _player = GetComponent<PlayerAttacker>();
+    private void Awake()
+    {
+        _enemyAnimation = GetComponent<EnemyAnimation>();
+        _player = GetComponent<PlayerAttacker>();
+        _currentHealth = _maxHealth;
+    }
 
     public void TakeDamage(float damage)
     {
-        _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
-        _player.ReactToAttack();
-        Debug.Log($"TakeDamage {damage}");
-        Attacked?.Invoke();
+        if (_player != null)
+        {
+            _player.ReactToAttack();
+            _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
+            Attacked?.Invoke();
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        if (_currentHealth <= _minHealth)
+        {
+            Destroy(gameObject);
+            _enemyAnimation.Dead();
+        }
     }
 }

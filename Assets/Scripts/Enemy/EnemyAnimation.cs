@@ -12,5 +12,8 @@ public class EnemyAnimation : MonoBehaviour
 
     public void Attack() => _animator.SetTrigger(AnimatorData.Parameters.Attack);
 
+    public void Dead() => _animator.SetTrigger(AnimatorData.Parameters.Run);
+
     private void Run() => _animator.SetFloat(AnimatorData.Parameters.Run, Mathf.Abs(_speed));
+
 }

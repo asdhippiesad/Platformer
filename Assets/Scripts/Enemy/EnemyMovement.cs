@@ -87,7 +87,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-               Flip(spriteRenderer);
+                Flip(spriteRenderer);
             }
         }
     }
