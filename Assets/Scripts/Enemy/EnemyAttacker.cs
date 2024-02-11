@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAttacker : MonoBehaviour
 {
-    [SerializeField] private int _damage = 40;
+    [SerializeField] private int _damage = 10;
     [SerializeField] private int _attackRange = 1;
 
     private EnemyAnimation _enemyAnimation;
@@ -14,19 +14,7 @@ public class EnemyAttacker : MonoBehaviour
         _enemyAnimation = GetComponent<EnemyAnimation>();
     }
 
-    private void OnEnable()
-    {
-        if (_playerHealth != null)
-            _playerHealth.Attacked += ReactToAttack;
-    }
-
-    private void OnDisable()
-    {
-        if (_playerHealth != null)
-            _playerHealth.Attacked -= ReactToAttack;
-    }
-
-    public void ReactToAttack()
+    public void Attack()
     {
         if (Vector3.Distance(transform.position, _playerHealth.transform.position) <= _attackRange)
         {

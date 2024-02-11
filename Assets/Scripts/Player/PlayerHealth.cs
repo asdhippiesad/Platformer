@@ -5,8 +5,6 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 100;
 
-    public event Action Attacked;
-
     private EnemyAttacker _enemy;
     private float _currentHealth;
     private float _minHealth = 0;
@@ -29,7 +27,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentHealth = Math.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
-        _enemy.ReactToAttack();
-        Attacked?.Invoke();
+        _enemy.Attack();
     }
 }

@@ -30,8 +30,5 @@ public class PlayerMover : MonoBehaviour
         _rigidbody.velocity = new Vector2(_move.x * _speed, _rigidbody.velocity.y);
     }
 
-    private void Flip()
-    {
-        _rotation.flipX = _move.x < 0;
-    }
+    private void Flip() => _rotation.flipX = _move.x < 0;
 }

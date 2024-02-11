@@ -6,7 +6,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform[] _point;
 
-
     private Vector2 _move;
     private SpriteRenderer[] _rotation;
     private SpriteRenderer _spriteRenderer;
@@ -44,13 +43,9 @@ public class EnemyMovement : MonoBehaviour
     public void Move()
     {
         if (_player != null)
-        {
             MoveChase();
-        }
         else
-        {
             MovePatrol();
-        }
     }
 
     private void MovePatrol()
@@ -92,8 +87,5 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Flip(SpriteRenderer spriteRenderer)
-    {
-        spriteRenderer.flipX = !spriteRenderer.flipX;
-    }
+    private void Flip(SpriteRenderer spriteRenderer) => spriteRenderer.flipX = !spriteRenderer.flipX;
 }

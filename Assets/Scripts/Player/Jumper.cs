@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Jumper : MonoBehaviour
@@ -9,28 +8,18 @@ public class Jumper : MonoBehaviour
     [SerializeField] private LayerMask _ground;
     [SerializeField] private Transform _groundCheck;
 
-    public event Action Jumped;
     private Rigidbody2D _rigidbody;
     private bool _isGrounded;
 
-    private void Awake() 
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    } 
+    private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
 
     private void Update()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _ground);
 
         if (_isGrounded == true && Input.GetKeyDown(KeyCode.Space))
-        {
             Jump();
-        }
     }
 
-    private void Jump()
-    {
-        _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-        Jumped?.Invoke();
-    }
+    private void Jump() => _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
 }
