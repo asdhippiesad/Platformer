@@ -9,9 +9,7 @@ public class Health : MonoBehaviour
         float minHeal = 20;
         float maxHeal = 50;
 
-        _health = amount;
-        _health = Mathf.Min(amount, minHeal, maxHeal);
-
+        _health = Mathf.Clamp(_health + amount, minHeal, maxHeal);
         Debug.Log($"Heal Health - {_health}");
     }
 }

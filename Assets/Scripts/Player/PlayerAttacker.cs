@@ -14,8 +14,8 @@ public class PlayerAttacker : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && Time.time >= _lastAttackTime + _attackCoolDown)
         {
-            _lastAttackTime = Time.time;
             Attack();
+            _lastAttackTime = Time.time;
         }
     }
 
@@ -30,7 +30,6 @@ public class PlayerAttacker : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(_damage);
-                Debug.Log($"{_damage} - Attack.");
             }
         }
     }

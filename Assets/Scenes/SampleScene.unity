@@ -346,8 +346,8 @@ GameObject:
   - component: {fileID: 412014304}
   - component: {fileID: 412014305}
   - component: {fileID: 412014307}
-  - component: {fileID: 412014309}
   - component: {fileID: 412014310}
+  - component: {fileID: 412014311}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -448,6 +448,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 301382656}
+  - {fileID: 1781458016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0.13}
 --- !u!95 &412014303
@@ -573,20 +574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e5cc27fc88e2c4694870f70362e7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &412014309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412014298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262f4e9bef53d0b43ab8765a025d4f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 40
-  _attackRange: 100
 --- !u!114 &412014310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,6 +587,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+--- !u!114 &412014311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412014298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262f4e9bef53d0b43ab8765a025d4f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _attackRange: 1
+  _attackPoint: {fileID: 1781458016}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +840,7 @@ GameObject:
   - component: {fileID: 1363410428}
   - component: {fileID: 1363410430}
   - component: {fileID: 1363410418}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,6 +1948,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733560220}
   m_CullTransparentMesh: 1
+--- !u!1 &1781458015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1781458016}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1781458016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781458015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.43, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 412014302}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861735879
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,24 +2,27 @@ using UnityEngine;
 
 public class EnemyAttacker : MonoBehaviour
 {
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private int _attackRange = 1;
+    [SerializeField] private Transform _attackPoint;
 
     private EnemyAnimation _enemyAnimation;
-    private PlayerHealth _playerHealth;
+    private PlayerHealth _player;
+    private float _damage = 15f;
 
     private void Awake()
     {
-        _playerHealth = GetComponent<PlayerHealth>();
+        _player = FindAnyObjectByType<PlayerHealth>();
         _enemyAnimation = GetComponent<EnemyAnimation>();
     }
 
+    private void OnEnable() => EnemyHealth.Attacked += Attack;
+
+    private void OnDisable() => EnemyHealth.Attacked -= Attack;
+
     public void Attack()
     {
-        if (Vector3.Distance(transform.position, _playerHealth.transform.position) <= _attackRange)
-        {
-            _enemyAnimation.Attack();
-            _playerHealth.TakeDamage(_damage);
-        }
+        _enemyAnimation.Attack();
+        _player.TakeDamage(_damage);
     }
 }
