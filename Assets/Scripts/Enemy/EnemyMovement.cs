@@ -69,19 +69,10 @@ public class EnemyMovement : MonoBehaviour
     {
         foreach (SpriteRenderer spriteRenderer in _rotation)
         {
-            if (_player != null)
+            if (transform.position.x < _player.transform.position.x || spriteRenderer.flipX == false && transform.position.x > _player.transform.position.x && spriteRenderer.flipX == true)
             {
-                if (transform.position.x < _player.transform.position.x && spriteRenderer.flipX == false)
-                {
-                    Flip(spriteRenderer);
-                }
-                else if (transform.position.x > _player.transform.position.x && spriteRenderer.flipX == true)
-                {
-                    Flip(spriteRenderer);
-                }
-            }
-            else
                 Flip(spriteRenderer);
+            }
         }
     }
 
