@@ -81,11 +81,12 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
             else
-            {
                 Flip(spriteRenderer);
-            }
         }
     }
 
-    private void Flip(SpriteRenderer spriteRenderer) => spriteRenderer.flipX = !spriteRenderer.flipX;
+    private void Flip(SpriteRenderer spriteRenderer)
+    {
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+    }
 }

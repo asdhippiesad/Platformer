@@ -1,21 +1,25 @@
 using UnityEngine;
 
-public class PlayerAttacker : MonoBehaviour
+public class Attacker : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _attackDistance = 1;
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private float _attackCoolDown = 0.2f;
+    [SerializeField] private float _damage;
 
-    private float _damage = 14f;
-    private float _lastAttackTime;
+    private Health _health;
+
+    private float _nextAttackTime = 0f;
+
+    private void Awake() => _health = GetComponent<Health>();
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && Time.time >= _lastAttackTime + _attackCoolDown)
+        if (Time.time >= _nextAttackTime)
         {
             Attack();
-            _lastAttackTime = Time.time;
+            _nextAttackTime = Time.time + _attackCoolDown;
         }
     }
 
@@ -25,12 +29,10 @@ public class PlayerAttacker : MonoBehaviour
 
         foreach (var enemyCollider in hitEnemy)
         {
-            EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
+            Health health = enemyCollider.GetComponent<Health>();
 
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(_damage);
-            }
+            if (health != null && health.IsAlive)
+                health.TakeDamage(_damage);
         }
     }
 }

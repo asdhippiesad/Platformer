@@ -6,10 +6,14 @@ public class PlayerAnimation : MonoBehaviour
 {
     private Animator _animator;
     private Rigidbody2D _rigidbody;
+    private EnemyAnimation _enemy;
+
+    private float _attackDistance = 2f;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _enemy = FindObjectOfType<EnemyAnimation>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -17,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         Move();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Vector3.Distance(transform.position, _enemy.transform.position) < _attackDistance)
             Attack();
 
         if (Input.GetKeyDown(KeyCode.Space))
