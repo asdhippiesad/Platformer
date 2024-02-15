@@ -7,21 +7,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform[] _point;
 
     private Vector2 _move;
-    private SpriteRenderer[] _rotation;
-    private SpriteRenderer _spriteRenderer;
     private PlayerMover _player;
 
     private int _currentPosition;
     private float _thresholdDistance = 1f;
-    private bool _isPatrolling = false;
     private bool _isChasing = true;
+    private bool _isShouldRight = true;
 
-    private void Awake()
-    {
-        _rotation = GetComponentsInChildren<SpriteRenderer>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _player = GetComponent<PlayerMover>();
-    }
+    private void Awake() => _player = GetComponent<PlayerMover>();
 
     private void Update() => Move();
 
@@ -29,15 +22,13 @@ public class EnemyMovement : MonoBehaviour
     {
         _player = player;
         _isChasing = true;
-        _isPatrolling = false;
     }
 
     public void StopChasing()
     {
         _player = null;
         _isChasing = false;
-        _isPatrolling = true;
-        Flip(_spriteRenderer);
+        Flip();
     }
 
     public void Move()
@@ -55,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, _point[_currentPosition].position) < _thresholdDistance)
         {
             _currentPosition = (_currentPosition + 1) % _point.Length;
-            Flip(_spriteRenderer);
+            Flip();
         }
     }
 
@@ -67,17 +58,15 @@ public class EnemyMovement : MonoBehaviour
 
     private void ChangingDirection()
     {
-        foreach (SpriteRenderer spriteRenderer in _rotation)
-        {
-            if (transform.position.x < _player.transform.position.x || spriteRenderer.flipX == false && transform.position.x > _player.transform.position.x && spriteRenderer.flipX == true)
-            {
-                Flip(spriteRenderer);
-            }
-        }
+        if (transform.position.x < _player.transform.position.x && _isShouldRight == true)
+            Flip();
+        else if (transform.position.x > _player.transform.position.x && _isShouldRight == false)
+            Flip();
     }
 
-    private void Flip(SpriteRenderer spriteRenderer)
+    private void Flip()
     {
-        spriteRenderer.flipX = !spriteRenderer.flipX;
+        _isShouldRight = !_isShouldRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
