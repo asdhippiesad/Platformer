@@ -67,6 +67,7 @@ public class EnemyMovement : MonoBehaviour
     private void Flip()
     {
         _isShouldRight = !_isShouldRight;
-        transform.Rotate(0f, 180f, 0f);
+        Transform sprite = transform;
+        sprite.localScale = new Vector3(-sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
     }
 }
