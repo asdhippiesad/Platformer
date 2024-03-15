@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -16,7 +15,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake() => _player = GetComponent<PlayerMover>();
 
-    private void Update() => Move();
+    private void Update()
+    {
+        if (_isChasing && _player != null)
+            MoveChase();
+        else
+            MovePatrol();
+    }
 
     public void StartChasing(PlayerMover player)
     {
@@ -29,14 +34,6 @@ public class EnemyMovement : MonoBehaviour
         _player = null;
         _isChasing = false;
         Flip();
-    }
-
-    public void Move()
-    {
-        if (_player != null)
-            MoveChase();
-        else
-            MovePatrol();
     }
 
     private void MovePatrol()
@@ -52,8 +49,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void MoveChase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
-        ChangingDirection();
+        if (_player != null)
+            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
+        else
+            ChangingDirection();
     }
 
     private void ChangingDirection()

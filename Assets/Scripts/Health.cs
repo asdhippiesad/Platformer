@@ -6,17 +6,25 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxHealth = 250;
 
     public event Action OnHealthChanged;
+
+    private float _currentHealth;
+    private float _healAmount = 50f;
+
     public float MaxHealth => _maxHealth;
     public float CurrentHealth => _currentHealth;
 
-    private float _currentHealth;
-
-    public bool IsAlive
-    {
-        get { return _currentHealth > 0; }
-    }
+    public bool IsAlive => _currentHealth > 0;
 
     private void Awake() => _currentHealth = _maxHealth;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<AidKit>(out AidKit aidkit))
+        {
+            Heal(_healAmount);
+            aidkit.Destroy();
+        }
+    }
 
     public void Heal(float amount)
     {
@@ -34,4 +42,5 @@ public class Health : MonoBehaviour
     }
 
     public void TriggerHealthChanged() => OnHealthChanged?.Invoke();
+
 }
