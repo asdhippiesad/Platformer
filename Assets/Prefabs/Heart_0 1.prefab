@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2881851383745893644}
   - component: {fileID: 2303965713052182716}
-  - component: {fileID: 4118976632538051952}
   - component: {fileID: 6456039761116808242}
   - component: {fileID: 8948050547653467472}
+  - component: {fileID: -2799063240706286626}
   m_Layer: 0
   m_Name: Heart_0 1
   m_TagString: Untagged
@@ -87,18 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4118976632538051952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3108730752119905179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b402ee267101dcc45990564f36166259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &6456039761116808242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,3 +153,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2799063240706286626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108730752119905179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c1d918d7eb0fd45b5b46b43a779739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4679927709597784077}
   - component: {fileID: 1548035485219810134}
-  - component: {fileID: 4545062711025577131}
   - component: {fileID: 4390485178752830610}
   - component: {fileID: 4245629931370482415}
+  - component: {fileID: -3496900945493763024}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -87,18 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4545062711025577131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3600817402528362627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc6300350b61efd48a619fe4f9e7c075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &4390485178752830610
 Animator:
   serializedVersion: 5
@@ -155,3 +143,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.019257426, y: -0.012838215}
   m_Size: {x: 0.34471965, y: 0.56297046}
   m_Direction: 0
+--- !u!114 &-3496900945493763024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600817402528362627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c1d918d7eb0fd45b5b46b43a779739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

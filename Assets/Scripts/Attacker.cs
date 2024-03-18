@@ -8,10 +8,9 @@ public class Attacker : MonoBehaviour
     [SerializeField] private float _attackCoolDown = 0.2f;
     [SerializeField] private float _damage;
 
+    private float _nextAttackTime = 0f;
 
     private Health _health;
-
-    private float _nextAttackTime = 0f;
 
     private void Awake() => _health = GetComponent<Health>();
 
@@ -33,10 +32,7 @@ public class Attacker : MonoBehaviour
             Health health = enemyCollider.GetComponent<Health>();
 
             if (health != null && health.IsAlive)
-            {
                 health.TakeDamage(_damage);
-                health.TriggerHealthChanged();
-            }
         }
     }
 }

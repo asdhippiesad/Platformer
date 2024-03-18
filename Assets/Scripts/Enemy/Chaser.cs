@@ -5,7 +5,7 @@ public class Chaser : MonoBehaviour
 {
     private EnemyMovement _enemy;
 
-    private void Awake() => _enemy = GetComponent<EnemyMovement>();
+    private void Awake() => _enemy = GetComponentInChildren<EnemyMovement>();
 
     private void OnTriggerStay2D(Collider2D collision)
     {

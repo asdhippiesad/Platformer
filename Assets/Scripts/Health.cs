@@ -5,10 +5,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 250;
 
-    public event Action OnHealthChanged;
-
     private float _currentHealth;
     private float _healAmount = 50f;
+
+    public event Action OnHealthChanged;
 
     public float MaxHealth => _maxHealth;
     public float CurrentHealth => _currentHealth;
@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<AidKit>(out AidKit aidkit))
+        if (collision.TryGetComponent<CollectebleItem>(out CollectebleItem aidkit))
         {
             Heal(_healAmount);
             aidkit.Destroy();
@@ -40,7 +40,4 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0f)
             Destroy(gameObject);
     }
-
-    public void TriggerHealthChanged() => OnHealthChanged?.Invoke();
-
 }
