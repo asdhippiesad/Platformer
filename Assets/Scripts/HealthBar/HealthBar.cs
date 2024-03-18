@@ -22,7 +22,7 @@ public class Healthbar : HealthUIElement
         float initialValue = _healthSlider.value;
         float targetValue = CurrentHealth;
 
-        while (!Mathf.Approximately(_healthSlider.value, targetValue))
+        while (Mathf.Approximately(_healthSlider.value, targetValue) == false)
         {
             initialValue = Mathf.MoveTowards(initialValue, targetValue, _speed * Time.deltaTime);
             _healthSlider.value = initialValue;
