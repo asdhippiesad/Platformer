@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using static Health;
 
 public class VampirismAbility : MonoBehaviour
 {
     [SerializeField] private float _coolDown = 10f;
     [SerializeField] private float _vampirismDuration = 6f;
-    [SerializeField] private float _abilityRaduis = 3f;
+    [SerializeField] private float _abilityRaduis = 5f;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Attacker _playerAttack;
     [SerializeField] private Health _health;
@@ -14,12 +13,11 @@ public class VampirismAbility : MonoBehaviour
     private Coroutine _coroutine;
 
     private float _drainRate = 1f;
-    private bool _isAttacking = true;
     private float _nextCoolDownAttack;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _isAttacking && Time.time >= _nextCoolDownAttack)
+        if (Input.GetKeyDown(KeyCode.Q) && Time.time >= _nextCoolDownAttack)
             StartCoroutine(CastVampireAttack());
     }
 

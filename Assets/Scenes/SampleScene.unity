@@ -1809,7 +1809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coolDown: 10
   _vampirismDuration: 6
-  _abilityRaduis: 3
+  _abilityRaduis: 5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
