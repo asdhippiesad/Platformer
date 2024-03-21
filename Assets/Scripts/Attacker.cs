@@ -10,10 +10,6 @@ public class Attacker : MonoBehaviour
 
     private float _nextAttackTime = 0f;
 
-    private Health _health;
-
-    private void Awake() => _health = GetComponent<Health>();
-
     private void Update()
     {
         if (Time.time >= _nextAttackTime)

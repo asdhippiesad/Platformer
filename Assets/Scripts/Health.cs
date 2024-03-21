@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 
     private float _currentHealth;
     private float _healAmount = 50f;
+    private PlayerAnimation _player;
 
     public event Action OnHealthChanged;
 
@@ -15,7 +16,11 @@ public class Health : MonoBehaviour
 
     public bool IsAlive => _currentHealth > 0;
 
-    private void Awake() => _currentHealth = _maxHealth;
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+        _player = GetComponent<PlayerAnimation>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

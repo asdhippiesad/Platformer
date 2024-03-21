@@ -7,5 +7,11 @@ public class HealthViewText : HealthUIElement
 
     private void Start() => HealthChanged();
 
-    protected override void HealthChanged() => _text.text = $"{CurrentHealth}/ {MaxHealth}";
+    protected override void HealthChanged()
+    {
+        int roundCurrentHealth = Mathf.RoundToInt(CurrentHealth);
+        int roundMaxHealth = Mathf.RoundToInt(MaxHealth);
+
+        _text.text = $"{roundCurrentHealth}/ {roundMaxHealth}";
+    }
 }

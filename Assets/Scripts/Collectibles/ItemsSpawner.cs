@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemsSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] _object;
+    [SerializeField] private GameObject[] _object;
     [SerializeField] private Transform _pointSpawn;
 
     private Transform[] _point;

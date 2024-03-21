@@ -26,6 +26,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
+
     }
 
     private void Move()
@@ -37,4 +38,5 @@ public class PlayerAnimation : MonoBehaviour
     private void Attack() => _animator.SetTrigger(AnimatorData.Parameters.Attack);
 
     private void Jump() => _animator.SetTrigger(AnimatorData.Parameters.Jump);
+
 }
