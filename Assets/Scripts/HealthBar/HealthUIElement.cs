@@ -8,9 +8,9 @@ public abstract class HealthUIElement : MonoBehaviour
 
     protected float CurrentHealth => _health.CurrentHealth;
 
-    private void Awake() => _health.OnHealthChanged += HealthChanged;
+    private void Awake() => _health.HealthChanged += HealthChanged;
 
-    private void OnDisable() => _health.OnHealthChanged -= HealthChanged;
+    private void OnDisable() => _health.HealthChanged -= HealthChanged;
 
     protected abstract void HealthChanged();
 }

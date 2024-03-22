@@ -9,12 +9,10 @@ public class Health : MonoBehaviour
     private float _healAmount = 50f;
     private PlayerAnimation _player;
 
-    public event Action OnHealthChanged;
+    public event Action HealthChanged;
 
     public float MaxHealth => _maxHealth;
     public float CurrentHealth => _currentHealth;
-
-    public bool IsAlive => _currentHealth > 0;
 
     private void Awake()
     {
@@ -34,13 +32,13 @@ public class Health : MonoBehaviour
     public void Heal(float amount)
     {
         _currentHealth = Mathf.Clamp(_currentHealth + amount, 0f, _maxHealth);
-        OnHealthChanged?.Invoke();
+        HealthChanged?.Invoke();
     }
 
     public void TakeDamage(float damage)
     {
         _currentHealth = Math.Clamp(_currentHealth - damage, 0f, _maxHealth);
-        OnHealthChanged?.Invoke();
+        HealthChanged?.Invoke();
 
         if (_currentHealth <= 0f)
             Destroy(gameObject);

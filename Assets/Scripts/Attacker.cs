@@ -15,19 +15,18 @@ public class Attacker : MonoBehaviour
         if (Time.time >= _nextAttackTime)
         {
             Attack();
-            _nextAttackTime = Time.time + _attackCoolDown;
         }
     }
 
     public void Attack()
     {
+        _nextAttackTime = Time.time + _attackCoolDown;
+
         Collider2D[] hitEnemy = Physics2D.OverlapCircleAll(_attackPoint.position, _attackDistance, _enemyLayer);
 
         foreach (var enemyCollider in hitEnemy)
         {
-            Health health = enemyCollider.GetComponent<Health>();
-
-            if (health != null && health.IsAlive)
+            if (enemyCollider.TryGetComponent(out Health health))
                 health.TakeDamage(_damage);
         }
     }

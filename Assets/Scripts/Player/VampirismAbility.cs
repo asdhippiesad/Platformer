@@ -3,37 +3,29 @@ using UnityEngine;
 
 public class VampirismAbility : MonoBehaviour
 {
-    [SerializeField] private float _coolDown = 10f;
     [SerializeField] private float _vampirismDuration = 6f;
-    [SerializeField] private float _abilityRaduis = 5f;
+    [SerializeField] private float _abilityRaduis = 10f;
     [SerializeField] private LayerMask _enemyLayer;
-    [SerializeField] private Attacker _playerAttack;
     [SerializeField] private Health _health;
 
     private Coroutine _coroutine;
 
-    private float _drainRate = 1f;
-    private float _nextCoolDownAttack;
+    private float _drainRate = 10f;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && Time.time >= _nextCoolDownAttack)
+        if (Input.GetKeyDown(KeyCode.Q))
             StartCoroutine(CastVampireAttack());
     }
 
     private IEnumerator CastVampireAttack()
     {
-        _nextCoolDownAttack = Time.time + _coolDown;
+        float endTime = Time.time + _vampirismDuration;
 
-        var attackTime = _vampirismDuration;
-
-        float timer = 0f;
-
-        while (timer < _vampirismDuration)
+        while (Time.time < endTime)
         {
             DrainHealth();
-            timer += Time.deltaTime;
-            yield return attackTime;
+            yield return null;
         }
     }
 
