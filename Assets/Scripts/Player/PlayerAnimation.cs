@@ -27,10 +27,9 @@ public class PlayerAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            VampirismAttack();
-
     }
+
+    public void VampirismAttack() => _animator.SetTrigger(AnimatorData.Parameters.VampirismAttack);
 
     private void Move()
     {
@@ -41,6 +40,4 @@ public class PlayerAnimation : MonoBehaviour
     private void Attack() => _animator.SetTrigger(AnimatorData.Parameters.Attack);
 
     private void Jump() => _animator.SetTrigger(AnimatorData.Parameters.Jump);
-
-    private void VampirismAttack() => _animator.SetTrigger(AnimatorData.Parameters.VampirismAttack);
 }

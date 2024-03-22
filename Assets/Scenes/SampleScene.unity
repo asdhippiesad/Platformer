@@ -722,7 +722,7 @@ MonoBehaviour:
   _attackDistance: 1
   _attackPoint: {fileID: 1781458016}
   _attackCoolDown: 0.2
-  _damage: 15
+  _damage: 5
 --- !u!114 &412014310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1451,6 +1451,7 @@ GameObject:
   - component: {fileID: 1363410431}
   - component: {fileID: 1363410432}
   - component: {fileID: 1363410434}
+  - component: {fileID: 1363410435}
   - component: {fileID: 1363410418}
   m_Layer: 8
   m_Name: Character
@@ -1736,7 +1737,7 @@ MonoBehaviour:
   _attackDistance: 1
   _attackPoint: {fileID: 1225373221}
   _attackCoolDown: 0.2
-  _damage: 20
+  _damage: 10
 --- !u!114 &1363410432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1807,14 +1808,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5f23c30048e13498fadce2d1321cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolDown: 10
   _vampirismDuration: 6
-  _abilityRaduis: 5
+  _abilityRaduis: 8
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  _playerAttack: {fileID: 412014309}
   _health: {fileID: 1363410432}
+--- !u!114 &1363410435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363410417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764b05f2510ccb642aebce573ed5462c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vampirismAbility: {fileID: 1363410434}
+  _playerAnimation: {fileID: 1363410421}
 --- !u!1 &1385703882
 GameObject:
   m_ObjectHideFlags: 0

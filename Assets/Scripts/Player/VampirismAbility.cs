@@ -12,11 +12,7 @@ public class VampirismAbility : MonoBehaviour
 
     private float _drainRate = 10f;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-            StartCoroutine(CastVampireAttack());
-    }
+    public void ActiveVampirism() => StartCoroutine(CastVampireAttack());
 
     private IEnumerator CastVampireAttack()
     {
@@ -35,14 +31,13 @@ public class VampirismAbility : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemeies)
         {
-            Health enemyHealth = enemy.GetComponent<Health>();
-            Attacker enemyAttacker = enemy.GetComponent<Attacker>();
-
-            if (enemyHealth != null && enemyAttacker != null && enemy.gameObject != gameObject)
+            if (enemy.TryGetComponent(out Health health) && enemy.TryGetComponent(out Attacker attack) && enemy.gameObject != gameObject)
             {
                 float damage = _drainRate * Time.deltaTime;
 
-                enemyHealth.TakeDamage(damage);
+                if (enemy != null)
+                    health.TakeDamage(damage);
+
                 _health.Heal(damage);
             }
         }
